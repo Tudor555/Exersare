@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Exersare
 {
@@ -30,7 +31,53 @@ namespace Exersare
             //Pb832();
             //Pb506();
             //Pb58();
-            Set2P6();
+            //Set2P6();
+            //Console.WriteLine(PisicasiEcuatorul(700));
+            Sirdenumere(10000);
+        }
+        //Scrieți o funcție care primește ca parametru un număr natural nenul n și afișează primele n
+        //elemente ale șirului 1,1,1,2,2,1,1,1,2,2,2,3,3,3,...
+        // 1
+        // 11 22
+        // 111 222 333
+        // 1111 2222 3333 4444
+        static void Sirdenumere(int n)
+        {
+            int contor = 0;
+            int i = 1;
+            while (contor < n)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    for (int k = 1; k <= i; k++)
+                    {
+                        Console.Write(j + " ");
+                        contor++;
+                        if (contor == n)
+                        {
+                            return;
+                        }
+                    }
+                }
+                i++;
+            }
+        }
+
+        /* Incape pisica intre ecuatorul curent si un ecuator imaginar cu 1m mai lung decat cel curent? 
+         * ecuator = r1 * 2pi => r1 = ecuator / 2pi
+         * ecuator + 1 = r2 * 2pi => r2 = ecuator + 1 / 2pi 
+         * 
+         * r2 - r1 = 1 / 2pi 
+         */
+        static bool PisicasiEcuatorul(double inaltime)
+        {
+            double result = 1 / (2 * Math.PI);
+            result = result * 100; // rezultatul e in metri, trebuie convertit in cm
+            if (inaltime < result)
+            {
+                return true;
+            }
+            else return false;
         }
         private static void Set2P6()
         {
@@ -85,7 +132,7 @@ namespace Exersare
             for (int i = 0; i < n; i++)
             {
                 
-                if (IsPrime(v[i]) == true)
+                if (IsPrime(v[i]) == true) //verificam daca un numar este prim
                     adev = true;
             }
             if (adev == true)
@@ -93,9 +140,9 @@ namespace Exersare
             else
                 Console.WriteLine("NU");
         }
-        static bool IsPrime(int number)
-        {
-            if (number <= 1)
+        static bool IsPrime(int number)   //verificam daca un numar este prim
+        {                                 //functia poate fi folosita si alt undeva
+            if (number <= 1)              //trebuie sa primeasca doar doua variabile
             {
                 return false;
             }
@@ -215,7 +262,7 @@ namespace Exersare
                 imin= imax;
                 imax= aux;
             }
-            for(int i=imin;i<=imax;i++)
+            for(int i=imin;i<=imax;i++)     //afisam vectorul de la indicele cu valaoare cea mai mica la cea mai mare 
                 Console.Write(v[i]+" ");
         }
         private static void Pb553()
@@ -228,7 +275,7 @@ namespace Exersare
             {
                 v[i] = int.Parse(t[i]);                   
             }
-            int min = v[0];int max = v[0];
+            int min = v[0];int max = v[0];      //cautam indicele unde se afla c ea mai mica si cea mai mare valoare
             for (int i = 0; i < n; i++)
             {
                 if (v[i] > max) 
@@ -309,7 +356,7 @@ namespace Exersare
             for(int i=0;i<n;i++)
                 Console.Write(v[i]+" ");
         }
-        private static void InsertionSort(int[] v)
+        private static void InsertionSort(int[] v)  //algoritmul de sortare Insertion Sort
         {
             int aux;
             for (int i = 1; i < v.Length; i++)  //indexare de la 1
